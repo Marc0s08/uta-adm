@@ -50,10 +50,7 @@ const AdminPage = () => {
     }
 
     try {
-      await setDoc(doc(db, collectionName, docName), {
-        ...data,
-        createdAt: new Date()
-      });
+      await setDoc(doc(db, collectionName, docName), data);
       setCollectionName('');
       setDocName('');
       setFields([{ name: '', value: '' }]);
