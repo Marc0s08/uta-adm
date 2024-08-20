@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
+import './general.css'; // Importa o CSS
 
 const predefinedCollections = ['homeContent', 'vendas', 'Aluguel', 'Briefings', 'midia'];
 

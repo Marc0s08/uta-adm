@@ -1,0 +1,101 @@
+/* Definições gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e; /* Cor de fundo escura */
+    color: #e0e0e0; /* Cor do texto em cinza claro */
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #ffffff; /* Texto em branco para contraste */
+    margin-top: 20px;
+  }
+  
+  /* Formulário */
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333333; /* Fundo do formulário em cinza escuro */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #cccccc; /* Rótulos em cinza claro */
+  }
+  
+  input[type="text"],
+  input[type="file"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #555555; /* Borda em cinza escuro */
+    border-radius: 4px;
+    background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
+    color: #e0e0e0; /* Texto do campo em cinza claro */
+  }
+  
+  input[type="file"] {
+    padding: 0; /* Remove o padding extra para o input de arquivo */
+  }
+  
+  button {
+    background-color: #444444; /* Fundo do botão em cinza escuro */
+    color: #e0e0e0; /* Texto do botão em cinza claro */
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #555555; /* Cor do botão ao passar o mouse */
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff; /* Cor do botão de submit em azul */
+    color: #ffffff; /* Texto do botão em branco */
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+  }
+  
+  button[type="button"] {
+    background-color: #888888; /* Cor dos botões de ação em cinza */
+  }
+  
+  button[type="button"]:hover {
+    background-color: #666666; /* Cinza mais escuro ao passar o mouse */
+  }
+  
+  /* Adiciona algum espaço entre os campos do formulário */
+  div {
+    margin-bottom: 15px;
+  }
+  
+  /* Adiciona algum espaço entre os campos de entrada e os botões */
+  input,
+  select {
+    margin-bottom: 10px;
+  }
+  
+  /* Ajusta o layout para dispositivos móveis */
+  @media (max-width: 600px) {
+    form {
+      padding: 10px;
+    }
+  
+    button {
+      width: 100%;
+      padding: 15px;
+    }
+  }
+  

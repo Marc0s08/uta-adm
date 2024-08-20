@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
+import './general.css'; // Importa o CSS
 
 const ManageDocuments = () => {
   const [collections] = useState(['homeContent', 'vendas', 'Aluguel', 'Briefings', 'midia']);
@@ -163,15 +164,15 @@ const ManageDocuments = () => {
                   <button 
                     type="button" 
                     onClick={() => handleRemoveField(index)} 
-                    style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}
+                    className="remove-field-button"
                   >
                     Remover Campo
                   </button>
                 )}
               </div>
             ))}
-            <button type="button" onClick={handleUpdate}>Atualizar Documento</button>
-            <button type="button" onClick={handleDelete} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>Deletar Documento</button>
+            <button type="button" onClick={handleUpdate} className="update-button">Atualizar Documento</button>
+            <button type="button" onClick={handleDelete} className="delete-button">Deletar Documento</button>
           </form>
         </div>
       )}
