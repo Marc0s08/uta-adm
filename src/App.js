@@ -10,8 +10,8 @@ function App() {
       <div className="App">
         <nav>
           <ul>
-            <li><Link to="/">Admin Page</Link></li>
-            <li><Link to="/manage-documents">Manage Documents</Link></li>
+            <li><Link to="/">Página de Administração</Link></li>
+            <li><Link to="/manage-documents">Gerenciar postagens</Link></li>
           </ul>
         </nav>
         <Routes>

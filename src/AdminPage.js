@@ -95,7 +95,7 @@ const AdminPage = () => {
         {fields.map((field, index) => (
           <div key={index}>
             <label>
-              Titulo em negrito
+              Titulo em Negrito
               <input
                 type="text"
                 name="name"
