@@ -68,7 +68,7 @@ const AdminPage = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            Selecione a Coleção:
+            Selecione a Página:
             <select
               value={collectionName}
               onChange={(e) => setCollectionName(e.target.value)}
@@ -83,7 +83,7 @@ const AdminPage = () => {
         </div>
         <div>
           <label>
-            Nome do Documento:
+            Identificação
             <input
               type="text"
               value={docName}
@@ -95,7 +95,7 @@ const AdminPage = () => {
         {fields.map((field, index) => (
           <div key={index}>
             <label>
-              Nome do Campo:
+              Titulo em negrito
               <input
                 type="text"
                 name="name"
@@ -105,7 +105,7 @@ const AdminPage = () => {
               />
             </label>
             <label>
-              Valor do Campo:
+              Descrição
               <input
                 type="text"
                 name="value"
@@ -123,8 +123,8 @@ const AdminPage = () => {
             <input type="file" onChange={handleImageUpload} />
           </label>
         </div>
-        <button type="button" onClick={handleAddField}>Adicionar Novo Campo</button>
-        <button type="submit">Adicionar Documento</button>
+        <button type="button" onClick={handleAddField}>Adicionar nova descrição</button>
+        <button type="submit">Upload Site</button>
       </form>
     </div>
   );
