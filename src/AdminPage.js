@@ -36,7 +36,11 @@ const AdminPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Verifica se a identificação foi fornecida
+    if (!collectionName) {
+      alert('Por favor, selecione uma coleção.');
+      return;
+    }
+
     if (!docName) {
       alert('Por favor, forneça uma identificação para o documento.');
       return;
@@ -100,7 +104,7 @@ const AdminPage = () => {
               type="text"
               value={docName}
               onChange={(e) => setDocName(e.target.value)}
-              required // Torna o campo obrigatório
+              required
             />
           </label>
         </div>
@@ -121,7 +125,7 @@ const AdminPage = () => {
                 name="value"
                 value={field.value}
                 onChange={(e) => handleFieldChange(index, e)}
-                rows={4} // Define a altura do textarea
+                rows={4}
               />
             </label>
             <button type="button" onClick={() => handleRemoveField(index)}>Remover Campo</button>
