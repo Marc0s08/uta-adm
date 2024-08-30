@@ -98,4 +98,14 @@ body {
       padding: 15px;
     }
   }
+  textarea {
+    width: 100%; /* Ajuste a largura conforme necessário */
+    height: 100px; /* Ajuste a altura conforme necessário */
+    resize: vertical; /* Permite redimensionar verticalmente */
+    background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
+    color: #e0e0e0; /* Texto do campo em cinza claro */
+  }
+  .field-value {
+    white-space: pre-wrap; /* Preserva as quebras de linha */
+  }
   

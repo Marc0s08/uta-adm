@@ -35,6 +35,13 @@ const AdminPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Verifica se a identificação foi fornecida
+    if (!docName) {
+      alert('Por favor, forneça uma identificação para o documento.');
+      return;
+    }
+
     const data = {};
     fields.forEach(field => {
       if (field.name && field.value) {
@@ -43,10 +50,16 @@ const AdminPage = () => {
     });
 
     if (imageFile) {
-      const imageRef = ref(storage, `images/${imageFile.name}`);
-      await uploadBytes(imageRef, imageFile);
-      const imageUrl = await getDownloadURL(imageRef);
-      data.imageUrl = imageUrl;
+      try {
+        const imageRef = ref(storage, `images/${imageFile.name}`);
+        await uploadBytes(imageRef, imageFile);
+        const imageUrl = await getDownloadURL(imageRef);
+        data.imageUrl = imageUrl;
+      } catch (error) {
+        console.error('Erro ao fazer upload da imagem: ', error);
+        alert('Erro ao fazer upload da imagem');
+        return;
+      }
     }
 
     try {
@@ -72,7 +85,6 @@ const AdminPage = () => {
             <select
               value={collectionName}
               onChange={(e) => setCollectionName(e.target.value)}
-              required
             >
               <option value="">Selecione uma coleção</option>
               {predefinedCollections.map((col, index) => (
@@ -88,30 +100,28 @@ const AdminPage = () => {
               type="text"
               value={docName}
               onChange={(e) => setDocName(e.target.value)}
-              required
+              required // Torna o campo obrigatório
             />
           </label>
         </div>
         {fields.map((field, index) => (
           <div key={index}>
             <label>
-              Titulo em Negrito
+              Título em Negrito
               <input
                 type="text"
                 name="name"
                 value={field.name}
                 onChange={(e) => handleFieldChange(index, e)}
-                required
               />
             </label>
             <label>
               Descrição
-              <input
-                type="text"
+              <textarea
                 name="value"
                 value={field.value}
                 onChange={(e) => handleFieldChange(index, e)}
-                required
+                rows={4} // Define a altura do textarea
               />
             </label>
             <button type="button" onClick={() => handleRemoveField(index)}>Remover Campo</button>
