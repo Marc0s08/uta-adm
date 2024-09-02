@@ -10,7 +10,7 @@ const AdminPage = () => {
   const [docName, setDocName] = useState('');
   const [fields, setFields] = useState([{ name: '', value: '' }]);
   const [imageFile, setImageFile] = useState(null);
-  const [contactLink, setContactLink] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
 
   const handleFieldChange = (index, e) => {
     const newFields = fields.slice();
@@ -66,8 +66,9 @@ const AdminPage = () => {
       }
     }
 
-    if (contactLink) {
-      data.contactLink = contactLink;
+    if (contactNumber) {
+      const formattedContactNumber = contactNumber.replace(/\D/g, '');
+      data.contactLink = `https://wa.me/+55${formattedContactNumber}`;
     }
 
     try {
@@ -76,19 +77,11 @@ const AdminPage = () => {
       setDocName('');
       setFields([{ name: '', value: '' }]);
       setImageFile(null);
-      setContactLink('');
+      setContactNumber('');
       alert('Documento adicionado com sucesso!');
     } catch (error) {
       console.error('Erro ao adicionar documento: ', error);
       alert('Erro ao adicionar documento');
-    }
-  };
-
-  const handleAddContact = () => {
-    if (collectionName === 'vendas' || collectionName === 'Aluguel') {
-      window.open('https://wa.me/?text=Olá!%20Gostaria%20de%20adicionar%20um%20contato%20à%20minha%20agenda.', '_blank');
-    } else {
-      alert('Este recurso está disponível apenas para as páginas de vendas e aluguel.');
     }
   };
 
@@ -152,25 +145,15 @@ const AdminPage = () => {
         </div>
         {collectionName === 'vendas' || collectionName === 'Aluguel' ? (
           <div>
-            <button
-              type="button"
-              style={{
-                display: 'inline-block',
-                marginTop: '10px',
-                padding: '10px 15px',
-                fontSize: '16px',
-                color: '#fff',
-                backgroundColor: '#25D366', // Cor do WhatsApp
-                border: 'none',
-                borderRadius: '5px',
-                textAlign: 'center',
-                textDecoration: 'none',
-                cursor: 'pointer',
-              }}
-              onClick={handleAddContact}
-            >
-              Adicionar Contato WhatsApp
-            </button>
+            <label>
+              Contato WhatsApp:
+              <input
+                type="text"
+                placeholder="Digite o número com DDD"
+                value={contactNumber}
+                onChange={(e) => setContactNumber(e.target.value)}
+              />
+            </label>
           </div>
         ) : null}
         <button type="button" onClick={handleAddField}>Adicionar nova descrição</button>
