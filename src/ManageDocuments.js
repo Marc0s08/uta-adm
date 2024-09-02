@@ -153,11 +153,11 @@ const ManageDocuments = () => {
                 </label>
                 <label>
                   Valor do Campo:
-                  <input
-                    type="text"
+                  <textarea
                     name="value"
                     value={field.value}
                     onChange={(e) => handleFieldChange(index, e)}
+                    rows={4}
                   />
                 </label>
                 {field.name !== 'imageUrl' && (
