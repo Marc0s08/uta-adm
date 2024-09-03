@@ -62,7 +62,6 @@ const ManageDocuments = () => {
           const imageRef = ref(storage, selectedDoc.imageUrl);
           await deleteObject(imageRef);
         }
-
         const newFields = updatedFields.filter((_, i) => i !== index);
         setUpdatedFields(newFields);
         alert(`Campo "${fieldToRemove}" removido com sucesso!`);
@@ -154,7 +153,7 @@ const ManageDocuments = () => {
                     type="text"
                     name="name"
                     value={field.name}
-                    disabled={field.name === 'imageUrl'} // Desabilita a edição do nome se for o campo imageUrl
+                    disabled={field.name === 'imageUrl' || field.name === 'isAlugada'} // Desabilita a edição do nome se for o campo imageUrl ou isAlugada
                   />
                 </label>
                 <label>
@@ -177,7 +176,7 @@ const ManageDocuments = () => {
                     />
                   )}
                 </label>
-                {field.name !== 'imageUrl' && (
+                {field.name !== 'imageUrl' && field.name !== 'isAlugada' && (
                   <button 
                     type="button" 
                     onClick={() => handleRemoveField(index)} 
