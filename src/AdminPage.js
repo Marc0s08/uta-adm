@@ -46,7 +46,9 @@ const AdminPage = () => {
       return;
     }
 
-    const data = {};
+    const data = {
+      isAlugada: false, // Define como não alugado por padrão
+    };
     fields.forEach(field => {
       if (field.name && field.value) {
         data[field.name] = field.value;

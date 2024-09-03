@@ -37,8 +37,14 @@ const ManageDocuments = () => {
   };
 
   const handleFieldChange = (index, e) => {
-    const newFields = updatedFields.slice();
-    newFields[index][e.target.name] = e.target.value;
+    const newFields = [...updatedFields];
+    newFields[index].value = e.target.value; // Atualiza o valor do campo
+    setUpdatedFields(newFields);
+  };
+
+  const handleSelectChange = (index, e) => {
+    const newFields = [...updatedFields];
+    newFields[index].value = e.target.value === 'true'; // Converte o valor para booleano
     setUpdatedFields(newFields);
   };
 
@@ -70,7 +76,7 @@ const ManageDocuments = () => {
   const handleUpdate = async () => {
     const updatedData = {};
     updatedFields.forEach(field => {
-      if (field.name && field.value) {
+      if (field.name) {
         updatedData[field.name] = field.value;
       }
     });
@@ -153,12 +159,23 @@ const ManageDocuments = () => {
                 </label>
                 <label>
                   Valor do Campo:
-                  <textarea
-                    name="value"
-                    value={field.value}
-                    onChange={(e) => handleFieldChange(index, e)}
-                    rows={4}
-                  />
+                  {field.name === 'isAlugada' ? (
+                    <select
+                      name="value"
+                      value={field.value}
+                      onChange={(e) => handleSelectChange(index, e)}
+                    >
+                      <option value={false}>Disponível</option>
+                      <option value={true}>Alugada</option>
+                    </select>
+                  ) : (
+                    <textarea
+                      name="value"
+                      value={field.value}
+                      onChange={(e) => handleFieldChange(index, e)}
+                      rows={4}
+                    />
+                  )}
                 </label>
                 {field.name !== 'imageUrl' && (
                   <button 
