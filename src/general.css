@@ -1,111 +1,152 @@
 /* Definições gerais */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1e1e1e; /* Cor de fundo escura */
-    color: #e0e0e0; /* Cor do texto em cinza claro */
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #ffffff; /* Texto em branco para contraste */
-    margin-top: 20px;
-  }
-  
-  /* Formulário */
+  font-family: Arial, sans-serif;
+  background-image: url('../public/images/fundo.jpg'); /* Adicione o caminho da sua imagem */
+  background-size: cover; /* Faz com que a imagem cubra todo o fundo */
+  background-position: center;
+  background-attachment: fixed; /* O fundo se move com a página */
+  color: #e0e0e0; /* Cor do texto em cinza claro */
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff; /* Texto em branco para contraste */
+  margin-top: 20px;
+}
+
+/* Barra de navegação */
+nav {
+background-color: rgba(30, 30, 30, 0.9); /* Fundo semitransparente */
+padding: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+}
+
+/* Lista de itens do menu */
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+}
+
+/* Estilo dos itens do menu */
+li {
+margin: 0 15px;
+}
+
+a {
+color: #e0e0e0;
+text-decoration: none;
+padding: 10px;
+font-weight: bold;
+transition: color 0.3s;
+}
+
+a:hover {
+color: #007bff; /* Azul para hover */
+}
+
+/* Formulário */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #333333; /* Fundo do formulário em cinza escuro */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #cccccc; /* Rótulos em cinza claro */
+}
+
+input[type="text"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #555555; /* Borda em cinza escuro */
+  border-radius: 4px;
+  background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
+  color: #e0e0e0; /* Texto do campo em cinza claro */
+}
+
+input[type="file"] {
+  padding: 0; /* Remove o padding extra para o input de arquivo */
+}
+
+button {
+  background-color: #444444; /* Fundo do botão em cinza escuro */
+  color: #e0e0e0; /* Texto do botão em cinza claro */
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #555555; /* Cor do botão ao passar o mouse */
+}
+
+button[type="submit"] {
+  background-color: #007bff; /* Cor do botão de submit em azul */
+  color: #ffffff; /* Texto do botão em branco */
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+button[type="button"] {
+  background-color: #888888; /* Cor dos botões de ação em cinza */
+}
+
+button[type="button"]:hover {
+  background-color: #666666; /* Cinza mais escuro ao passar o mouse */
+}
+
+/* Adiciona algum espaço entre os campos do formulário */
+div {
+  margin-bottom: 15px;
+}
+
+/* Adiciona algum espaço entre os campos de entrada e os botões */
+input,
+select {
+  margin-bottom: 10px;
+}
+
+/* Ajusta o layout para dispositivos móveis */
+@media (max-width: 600px) {
   form {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #333333; /* Fundo do formulário em cinza escuro */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    color: #cccccc; /* Rótulos em cinza claro */
-  }
-  
-  input[type="text"],
-  input[type="file"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #555555; /* Borda em cinza escuro */
-    border-radius: 4px;
-    background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
-    color: #e0e0e0; /* Texto do campo em cinza claro */
-  }
-  
-  input[type="file"] {
-    padding: 0; /* Remove o padding extra para o input de arquivo */
-  }
-  
-  button {
-    background-color: #444444; /* Fundo do botão em cinza escuro */
-    color: #e0e0e0; /* Texto do botão em cinza claro */
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  button:hover {
-    background-color: #555555; /* Cor do botão ao passar o mouse */
-  }
-  
-  button[type="submit"] {
-    background-color: #007bff; /* Cor do botão de submit em azul */
-    color: #ffffff; /* Texto do botão em branco */
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
-  }
-  
-  button[type="button"] {
-    background-color: #888888; /* Cor dos botões de ação em cinza */
-  }
-  
-  button[type="button"]:hover {
-    background-color: #666666; /* Cinza mais escuro ao passar o mouse */
-  }
-  
-  /* Adiciona algum espaço entre os campos do formulário */
-  div {
-    margin-bottom: 15px;
-  }
-  
-  /* Adiciona algum espaço entre os campos de entrada e os botões */
-  input,
-  select {
-    margin-bottom: 10px;
-  }
-  
-  /* Ajusta o layout para dispositivos móveis */
-  @media (max-width: 600px) {
-    form {
       padding: 10px;
-    }
-  
-    button {
+  }
+
+  button {
       width: 100%;
       padding: 15px;
-    }
   }
-  textarea {
-    width: 100%; /* Ajuste a largura conforme necessário */
-    height: 100px; /* Ajuste a altura conforme necessário */
-    resize: vertical; /* Permite redimensionar verticalmente */
-    background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
-    color: #e0e0e0; /* Texto do campo em cinza claro */
-  }
-  .field-value {
-    white-space: pre-wrap; /* Preserva as quebras de linha */
-  }
-  
+}
+
+textarea {
+  width: 100%; /* Ajuste a largura conforme necessário */
+  height: 100px; /* Ajuste a altura conforme necessário */
+  resize: vertical; /* Permite redimensionar verticalmente */
+  background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
+  color: #e0e0e0; /* Texto do campo em cinza claro */
+}
+
+.field-value {
+  white-space: pre-wrap; /* Preserva as quebras de linha */
+}
