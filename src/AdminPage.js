@@ -8,23 +8,24 @@ const predefinedCollections = ['homeContent', 'vendas', 'Aluguel', 'Briefings', 
 const AdminPage = () => {
   const [collectionName, setCollectionName] = useState('');
   const [docName, setDocName] = useState('');
-  const [fields, setFields] = useState([{ name: '', value: '' }]);
+  const [fields, setFields] = useState([{ name: '', value: '', order: 1 }]);
   const [imageFile, setImageFile] = useState(null);
   const [contactNumber, setContactNumber] = useState('');
 
   const handleFieldChange = (index, e) => {
-    const newFields = fields.slice();
+    const newFields = [...fields];
     newFields[index][e.target.name] = e.target.value;
     setFields(newFields);
   };
 
   const handleAddField = () => {
-    setFields([...fields, { name: '', value: '' }]);
+    const newOrder = fields.length ? Math.max(...fields.map(f => f.order)) + 1 : 1;
+    setFields([...fields, { name: '', value: '', order: newOrder }]);
   };
 
   const handleRemoveField = (index) => {
     const newFields = fields.filter((_, i) => i !== index);
-    setFields(newFields);
+    setFields(newFields.map((field, i) => ({ ...field, order: i + 1 }))); // Reordenar
   };
 
   const handleImageUpload = (e) => {
@@ -46,14 +47,7 @@ const AdminPage = () => {
       return;
     }
 
-    const data = {
-      isAlugada: false, // Define como não alugado por padrão
-    };
-    fields.forEach(field => {
-      if (field.name && field.value) {
-        data[field.name] = field.value;
-      }
-    });
+    const data = { fields: fields.filter(field => field.name && field.value).sort((a, b) => a.order - b.order) };
 
     if (imageFile) {
       try {
@@ -68,16 +62,21 @@ const AdminPage = () => {
       }
     }
 
-    if (contactNumber) {
-      const formattedContactNumber = contactNumber.replace(/\D/g, '');
-      data.contactLink = `https://wa.me/+55${formattedContactNumber}`;
+    if (collectionName === 'vendas' || collectionName === 'Aluguel') {
+      if (contactNumber) {
+        const formattedContactNumber = contactNumber.replace(/\D/g, '');
+        data.contactLink = `https://wa.me/+55${formattedContactNumber}`;
+      } else {
+        alert('Por favor, forneça um número de contato.');
+        return;
+      }
     }
 
     try {
       await setDoc(doc(db, collectionName, docName), data);
       setCollectionName('');
       setDocName('');
-      setFields([{ name: '', value: '' }]);
+      setFields([{ name: '', value: '', order: 1 }]);
       setImageFile(null);
       setContactNumber('');
       alert('Documento adicionado com sucesso!');
@@ -145,7 +144,7 @@ const AdminPage = () => {
             <input type="file" onChange={handleImageUpload} />
           </label>
         </div>
-        {collectionName === 'vendas' || collectionName === 'Aluguel' ? (
+        {(collectionName === 'vendas' || collectionName === 'Aluguel') && (
           <div>
             <label>
               Contato WhatsApp:
@@ -157,7 +156,7 @@ const AdminPage = () => {
               />
             </label>
           </div>
-        ) : null}
+        )}
         <button type="button" onClick={handleAddField}>Adicionar nova descrição</button>
         <button type="submit">Upload Site</button>
       </form>
