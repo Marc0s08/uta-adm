@@ -150,3 +150,29 @@ textarea {
 .field-value {
   white-space: pre-wrap; /* Preserva as quebras de linha */
 }
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  border: 1px solid #130707;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #120303;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  border: none;
+  background-color: #090707;
+  width: 100%;
+  resize: none;
+}
+
+.remove-field-button, .update-button, .delete-button {
+  margin-top: 10px;
+}

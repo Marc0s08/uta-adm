@@ -28,43 +28,50 @@ const ManageDocuments = () => {
 
   const handleSelectDoc = (doc) => {
     setSelectedDoc(doc);
-    setUpdatedFields(Object.entries(doc).map(([name, value]) => ({ name, value })));
+    setUpdatedFields(
+      Object.entries(doc.fields || {}).map(([name, value], index) => {
+        let parsedValue;
+        try {
+          parsedValue = typeof value === 'string' ? JSON.parse(value) : value;
+        } catch (error) {
+          parsedValue = value;
+        }
 
-    // Adiciona o campo imageUrl se não estiver presente
-    if (!doc.hasOwnProperty('imageUrl')) {
-      setUpdatedFields(prevFields => [...prevFields, { name: 'imageUrl', value: '' }]);
+        return {
+          name,
+          value: parsedValue,
+          order: index + 1
+        };
+      })
+    );
+  };
+
+  const handleFieldChange = (index, fieldType, e) => {
+    const newFields = [...updatedFields];
+    if (fieldType === 'name') {
+      newFields[index].value.name = e.target.value; 
+    } else if (fieldType === 'value') {
+      newFields[index].value.value = e.target.value; 
     }
-  };
-
-  const handleFieldChange = (index, e) => {
-    const newFields = [...updatedFields];
-    newFields[index].value = e.target.value; // Atualiza o valor do campo
-    setUpdatedFields(newFields);
-  };
-
-  const handleSelectChange = (index, e) => {
-    const newFields = [...updatedFields];
-    newFields[index].value = e.target.value === 'true'; // Converte o valor para booleano
     setUpdatedFields(newFields);
   };
 
   const handleRemoveField = async (index) => {
-    if (window.confirm(`Tem certeza que deseja remover o campo "${updatedFields[index].name}"?`)) {
+    if (window.confirm(`Tem certeza que deseja remover o campo?`)) {
       const fieldToRemove = updatedFields[index].name;
-      const updatedData = { ...selectedDoc };
-      delete updatedData[fieldToRemove];  // Remove o campo localmente
+      const updatedData = { ...selectedDoc, fields: { ...selectedDoc.fields } };
+      delete updatedData.fields[fieldToRemove];
 
       try {
         await updateDoc(doc(db, collectionName, selectedDoc.id), updatedData);
-        
-        // Remove a imagem se o campo 'imageUrl' for removido
-        if (fieldToRemove === 'imageUrl') {
+
+        if (fieldToRemove === 'imageUrl' && selectedDoc.imageUrl) {
           const imageRef = ref(storage, selectedDoc.imageUrl);
           await deleteObject(imageRef);
         }
         const newFields = updatedFields.filter((_, i) => i !== index);
         setUpdatedFields(newFields);
-        alert(`Campo "${fieldToRemove}" removido com sucesso!`);
+        alert('Campo removido com sucesso!');
       } catch (error) {
         console.error('Erro ao remover campo: ', error);
         alert('Erro ao remover campo');
@@ -72,13 +79,37 @@ const ManageDocuments = () => {
     }
   };
 
+  // Função para verificar se uma string é um JSON válido
+  const isValidJson = (value) => {
+    if (typeof value !== 'string') return false;
+    try {
+      JSON.parse(value);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   const handleUpdate = async () => {
-    const updatedData = {};
-    updatedFields.forEach(field => {
-      if (field.name) {
-        updatedData[field.name] = field.value;
-      }
-    });
+    const updatedData = {
+      fields: updatedFields
+        .filter(field => field.value)
+        .reduce((acc, field) => {
+          if (typeof field.value === 'string') {
+            // Verifica se a string é um JSON válido antes de tentar fazer o parse
+            try {
+              acc[field.name] = isValidJson(field.value) ? JSON.parse(field.value) : field.value;
+            } catch (error) {
+              console.error(`Erro ao analisar JSON para o campo ${field.name}:`, error);
+              alert(`Erro ao analisar JSON no campo ${field.name}. Verifique a formatação.`);
+            }
+          } else {
+            acc[field.name] = field.value; 
+          }
+          return acc;
+        }, {})
+    };
+
     try {
       await updateDoc(doc(db, collectionName, selectedDoc.id), updatedData);
       alert('Documento atualizado com sucesso!');
@@ -91,9 +122,8 @@ const ManageDocuments = () => {
   };
 
   const handleDelete = async () => {
-    if (window.confirm(`Tem certeza que deseja deletar o documento "${selectedDoc.id}"?`)) {
+    if (window.confirm(`Tem certeza que deseja deletar o documento?`)) {
       try {
-        // Remove a imagem se existir
         if (selectedDoc.imageUrl) {
           const imageRef = ref(storage, selectedDoc.imageUrl);
           await deleteObject(imageRef);
@@ -145,38 +175,49 @@ const ManageDocuments = () => {
         <div>
           <h2>Editar Documento: {selectedDoc.id}</h2>
           <form onSubmit={(e) => e.preventDefault()}>
-            {updatedFields.map((field, index) => (
-              <div key={index}>
-                <label>
-                  Nome do Campo:
+            {updatedFields
+              .sort((a, b) => a.order - b.order)
+              .map((field, index) => (
+                <div key={index} className="field">
+                  <label>Nome do Campo:</label>
                   <input
                     type="text"
-                    name="name"
                     value={field.name}
-                    disabled={field.name === 'imageUrl' || field.name === 'isAlugada'} // Desabilita a edição do nome se for o campo imageUrl ou isAlugada
+                    readOnly
+                    className="field-name-input"
                   />
-                </label>
-                <label>
-                  Valor do Campo:
-                  {field.name === 'isAlugada' ? (
-                    <select
-                      name="value"
-                      value={field.value}
-                      onChange={(e) => handleSelectChange(index, e)}
-                    >
-                      <option value={false}>Disponível</option>
-                      <option value={true}>Alugada</option>
-                    </select>
+
+                  {typeof field.value === 'object' && field.value.name && field.value.value ? (
+                    <div>
+                      <label>Nome Interno:</label>
+                      <input
+                        type="text"
+                        value={field.value.name}
+                        onChange={(e) => handleFieldChange(index, 'name', e)}
+                        className="field-internal-name-input"
+                      />
+                      <label>Valor Interno:</label>
+                      <textarea
+                        value={field.value.value.replace(/\\n/g, '\n').replace(/\\t/g, '\t')}
+                        onChange={(e) => handleFieldChange(index, 'value', e)}
+                        rows={6}
+                        className="field-value-textarea"
+                        style={{ whiteSpace: 'pre-line' }}
+                      />
+                    </div>
                   ) : (
-                    <textarea
-                      name="value"
-                      value={field.value}
-                      onChange={(e) => handleFieldChange(index, e)}
-                      rows={4}
-                    />
+                    <div>
+                      <label>Valor:</label>
+                      <textarea
+                        value={field.value.replace(/\\n/g, '\n').replace(/\\t/g, '\t')}
+                        onChange={(e) => handleFieldChange(index, 'value', e)}
+                        rows={6}
+                        className="field-value-textarea"
+                        style={{ whiteSpace: 'pre-line' }}
+                      />
+                    </div>
                   )}
-                </label>
-                {field.name !== 'imageUrl' && field.name !== 'isAlugada' && (
+
                   <button 
                     type="button" 
                     onClick={() => handleRemoveField(index)} 
@@ -184,11 +225,12 @@ const ManageDocuments = () => {
                   >
                     Remover Campo
                   </button>
-                )}
-              </div>
-            ))}
-            <button type="button" onClick={handleUpdate} className="update-button">Atualizar Documento</button>
-            <button type="button" onClick={handleDelete} className="delete-button">Deletar Documento</button>
+                </div>
+              ))}
+            <div className="button-group">
+              <button type="button" onClick={handleUpdate} className="update-button">Atualizar Documento</button>
+              <button type="button" onClick={handleDelete} className="delete-button">Deletar Documento</button>
+            </div>
           </form>
         </div>
       )}

@@ -9,7 +9,7 @@ const AdminPage = () => {
   const [collectionName, setCollectionName] = useState('');
   const [docName, setDocName] = useState('');
   const [fields, setFields] = useState([{ name: '', value: '', order: 1 }]);
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]); // Para várias imagens
   const [contactNumber, setContactNumber] = useState('');
 
   const handleFieldChange = (index, e) => {
@@ -29,8 +29,10 @@ const AdminPage = () => {
   };
 
   const handleImageUpload = (e) => {
-    if (e.target.files[0]) {
-      setImageFile(e.target.files[0]);
+    if (collectionName === 'midia') {
+      setImageFiles([...e.target.files]); // Para múltiplas imagens
+    } else if (e.target.files[0]) {
+      setImageFiles([e.target.files[0]]); // Uma imagem para outras coleções
     }
   };
 
@@ -49,12 +51,16 @@ const AdminPage = () => {
 
     const data = { fields: fields.filter(field => field.name && field.value).sort((a, b) => a.order - b.order) };
 
-    if (imageFile) {
+    if (imageFiles.length > 0) {
       try {
-        const imageRef = ref(storage, `images/${imageFile.name}`);
-        await uploadBytes(imageRef, imageFile);
-        const imageUrl = await getDownloadURL(imageRef);
-        data.imageUrl = imageUrl;
+        const imageUrls = await Promise.all(
+          imageFiles.map(async (imageFile) => {
+            const imageRef = ref(storage, `images/${imageFile.name}`);
+            await uploadBytes(imageRef, imageFile);
+            return await getDownloadURL(imageRef);
+          })
+        );
+        data.images = imageUrls;
       } catch (error) {
         console.error('Erro ao fazer upload da imagem: ', error);
         alert('Erro ao fazer upload da imagem');
@@ -77,7 +83,7 @@ const AdminPage = () => {
       setCollectionName('');
       setDocName('');
       setFields([{ name: '', value: '', order: 1 }]);
-      setImageFile(null);
+      setImageFiles([]);
       setContactNumber('');
       alert('Documento adicionado com sucesso!');
     } catch (error) {
@@ -93,10 +99,7 @@ const AdminPage = () => {
         <div>
           <label>
             Selecione a Página:
-            <select
-              value={collectionName}
-              onChange={(e) => setCollectionName(e.target.value)}
-            >
+            <select value={collectionName} onChange={(e) => setCollectionName(e.target.value)}>
               <option value="">Selecione uma coleção</option>
               {predefinedCollections.map((col, index) => (
                 <option key={index} value={col}>{col}</option>
@@ -107,53 +110,33 @@ const AdminPage = () => {
         <div>
           <label>
             Identificação
-            <input
-              type="text"
-              value={docName}
-              onChange={(e) => setDocName(e.target.value)}
-              required
-            />
+            <input type="text" value={docName} onChange={(e) => setDocName(e.target.value)} required />
           </label>
         </div>
         {fields.map((field, index) => (
           <div key={index}>
             <label>
               Título em Negrito
-              <input
-                type="text"
-                name="name"
-                value={field.name}
-                onChange={(e) => handleFieldChange(index, e)}
-              />
+              <input type="text" name="name" value={field.name} onChange={(e) => handleFieldChange(index, e)} />
             </label>
             <label>
               Descrição
-              <textarea
-                name="value"
-                value={field.value}
-                onChange={(e) => handleFieldChange(index, e)}
-                rows={4}
-              />
+              <textarea name="value" value={field.value} onChange={(e) => handleFieldChange(index, e)} rows={4} />
             </label>
             <button type="button" onClick={() => handleRemoveField(index)}>Remover Campo</button>
           </div>
         ))}
         <div>
           <label>
-            Upload de Imagem:
-            <input type="file" onChange={handleImageUpload} />
+            Upload de Imagem{collectionName === 'midia' ? 's (várias)' : ''}:
+            <input type="file" onChange={handleImageUpload} multiple={collectionName === 'midia'} />
           </label>
         </div>
         {(collectionName === 'vendas' || collectionName === 'Aluguel') && (
           <div>
             <label>
               Contato WhatsApp:
-              <input
-                type="text"
-                placeholder="Digite o número com DDD"
-                value={contactNumber}
-                onChange={(e) => setContactNumber(e.target.value)}
-              />
+              <input type="text" placeholder="Digite o número com DDD" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} />
             </label>
           </div>
         )}
