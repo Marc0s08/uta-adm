@@ -52,21 +52,27 @@ const AdminPage = () => {
     const data = { fields: fields.filter(field => field.name && field.value).sort((a, b) => a.order - b.order) };
 
     if (imageFiles.length > 0) {
-      try {
-        const imageUrls = await Promise.all(
-          imageFiles.map(async (imageFile) => {
-            const imageRef = ref(storage, `images/${imageFile.name}`);
-            await uploadBytes(imageRef, imageFile);
-            return await getDownloadURL(imageRef);
-          })
-        );
-        data.images = imageUrls;
-      } catch (error) {
-        console.error('Erro ao fazer upload da imagem: ', error);
-        alert('Erro ao fazer upload da imagem');
-        return;
-      }
+  try {
+    const imageUrls = await Promise.all(
+      imageFiles.map(async (imageFile) => {
+        const imageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`);
+        await uploadBytes(imageRef, imageFile);
+        return await getDownloadURL(imageRef);
+      })
+    );
+
+    if (collectionName === 'midia') {
+      data.imageUrl = imageUrls; // várias imagens
+    } else {
+      data.imageUrl = imageUrls[0]; // uma imagem
     }
+
+  } catch (error) {
+    console.error('Erro ao fazer upload da imagem: ', error);
+    alert('Erro ao fazer upload da imagem');
+    return;
+  }
+}
 
     if (collectionName === 'vendas' || collectionName === 'Aluguel') {
       if (contactNumber) {
