@@ -1,178 +1,524 @@
-/* Definições gerais */
-body {
-  font-family: Arial, sans-serif;
-  background-image: url('../public/images/fundo.jpg'); /* Adicione o caminho da sua imagem */
-  background-size: cover; /* Faz com que a imagem cubra todo o fundo */
-  background-position: center;
-  background-attachment: fixed; /* O fundo se move com a página */
-  color: #e0e0e0; /* Cor do texto em cinza claro */
-  margin: 0;
-  padding: 0;
+/* ===========================
+   CONFIGURAÇÕES GERAIS
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-h1 {
-  text-align: center;
-  color: #ffffff; /* Texto em branco para contraste */
-  margin-top: 20px;
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:
+
+    linear-gradient(
+        rgba(10,10,10,.85),
+        rgba(10,10,10,.9)
+    ),
+
+    url('../public/images/fundo.jpg');
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    color:white;
+
 }
 
-/* Barra de navegação */
-nav {
-background-color: rgba(30, 30, 30, 0.9); /* Fundo semitransparente */
-padding: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
-position: fixed;
-width: 100%;
-top: 0;
-z-index: 1000;
+
+/* ===========================
+   TITULOS
+=========================== */
+
+
+h1,h2,h3{
+
+    color:white;
+
+    letter-spacing:2px;
+
 }
 
-/* Lista de itens do menu */
-ul {
-list-style-type: none;
-margin: 0;
-padding: 0;
-display: flex;
-justify-content: center;
+
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+
+nav{
+
+    background:
+
+    rgba(20,20,20,.85);
+
+    backdrop-filter:blur(12px);
+
+    padding:15px;
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,.5);
+
+    position:fixed;
+
+    width:100%;
+
+    top:0;
+
+    z-index:1000;
+
 }
 
-/* Estilo dos itens do menu */
-li {
-margin: 0 15px;
+
+
+nav ul{
+
+
+    list-style:none;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
 }
 
-a {
-color: #e0e0e0;
-text-decoration: none;
-padding: 10px;
-font-weight: bold;
-transition: color 0.3s;
+
+
+nav li{
+
+    margin:0;
+
 }
 
-a:hover {
-color: #007bff; /* Azul para hover */
+
+nav a{
+
+
+    color:#ddd;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.3s;
+
 }
 
-/* Formulário */
-form {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #333333; /* Fundo do formulário em cinza escuro */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
+
+nav a:hover{
+
+
+    color:#27ae60;
+
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
-  color: #cccccc; /* Rótulos em cinza claro */
+
+
+
+/* ===========================
+   CONTAINERS
+=========================== */
+
+
+.container,
+form{
+
+
+    max-width:1200px;
+
+    margin:100px auto 30px;
+
+    padding:30px;
+
+
+    background:
+
+    rgba(255,255,255,.05);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    border-radius:20px;
+
+
+    backdrop-filter:blur(12px);
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.5);
+
 }
 
-input[type="text"],
-input[type="file"],
-select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #555555; /* Borda em cinza escuro */
-  border-radius: 4px;
-  background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
-  color: #e0e0e0; /* Texto do campo em cinza claro */
+
+
+/* ===========================
+   FORMULÁRIOS
+=========================== */
+
+
+label{
+
+
+    color:#ccc;
+
+    font-weight:bold;
+
 }
 
-input[type="file"] {
-  padding: 0; /* Remove o padding extra para o input de arquivo */
-}
 
-button {
-  background-color: #444444; /* Fundo do botão em cinza escuro */
-  color: #e0e0e0; /* Texto do botão em cinza claro */
-  border: none;
-  border-radius: 4px;
-  padding: 10px;
-  cursor: pointer;
-  margin-top: 10px;
-}
 
-button:hover {
-  background-color: #555555; /* Cor do botão ao passar o mouse */
-}
-
-button[type="submit"] {
-  background-color: #007bff; /* Cor do botão de submit em azul */
-  color: #ffffff; /* Texto do botão em branco */
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
-}
-
-button[type="button"] {
-  background-color: #888888; /* Cor dos botões de ação em cinza */
-}
-
-button[type="button"]:hover {
-  background-color: #666666; /* Cinza mais escuro ao passar o mouse */
-}
-
-/* Adiciona algum espaço entre os campos do formulário */
-div {
-  margin-bottom: 15px;
-}
-
-/* Adiciona algum espaço entre os campos de entrada e os botões */
 input,
-select {
-  margin-bottom: 10px;
+select,
+textarea{
+
+
+    width:100%;
+
+    padding:12px;
+
+
+    margin-top:8px;
+
+    margin-bottom:15px;
+
+
+    background:
+
+    rgba(0,0,0,.5);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+    border-radius:10px;
+
+
+    color:white;
+
+
 }
 
-/* Ajusta o layout para dispositivos móveis */
-@media (max-width: 600px) {
-  form {
-      padding: 10px;
-  }
 
-  button {
-      width: 100%;
-      padding: 15px;
-  }
+
+textarea{
+
+
+    min-height:120px;
+
+    resize:vertical;
+
 }
 
-textarea {
-  width: 100%; /* Ajuste a largura conforme necessário */
-  height: 100px; /* Ajuste a altura conforme necessário */
-  resize: vertical; /* Permite redimensionar verticalmente */
-  background-color: #1e1e1e; /* Fundo do campo em cinza escuro */
-  color: #e0e0e0; /* Texto do campo em cinza claro */
+
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+
+    outline:none;
+
+    border-color:#27ae60;
+
 }
 
-.field-value {
-  white-space: pre-wrap; /* Preserva as quebras de linha */
-}
-.card-container {
-  display: flex;
-  flex-direction: column;
+
+
+
+/* ===========================
+   CARDS
+=========================== */
+
+
+.card-container{
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
 }
 
-.card {
-  border: 1px solid #130707;
-  border-radius: 4px;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #120303;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+
+
+.card{
+
+
+    background:
+
+
+    rgba(255,255,255,.06);
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.12);
+
+
+    border-radius:18px;
+
+
+    padding:25px;
+
+
+    backdrop-filter:blur(10px);
+
+
+    transition:.3s;
+
+
 }
 
-textarea {
-  border: none;
-  background-color: #090707;
-  width: 100%;
-  resize: none;
+
+
+.card:hover{
+
+
+    transform:translateY(-5px);
+
+
+    border-color:#27ae60;
+
+
+    box-shadow:
+
+
+    0 15px 30px rgba(0,0,0,.5);
+
+
 }
 
-.remove-field-button, .update-button, .delete-button {
-  margin-top: 10px;
+
+
+
+
+/* ===========================
+   BOTÕES
+=========================== */
+
+
+button{
+
+
+    background:#27ae60;
+
+
+    color:white;
+
+
+    border:none;
+
+
+    padding:12px 25px;
+
+
+    border-radius:10px;
+
+
+    cursor:pointer;
+
+
+    font-weight:bold;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+    background:#1e8449;
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+.remove-field-button{
+
+
+    background:#c0392b;
+
+}
+
+
+.remove-field-button:hover{
+
+
+    background:#922b21;
+
+}
+
+
+
+
+
+.update-button{
+
+
+    background:#2980b9;
+
+}
+
+
+.update-button:hover{
+
+
+    background:#1f618d;
+
+}
+
+
+
+
+
+.delete-button{
+
+
+    background:#c0392b;
+
+}
+
+
+
+
+
+/* ===========================
+   CAMPOS DE TEXTO FIREBASE
+=========================== */
+
+
+.field-value{
+
+
+    white-space:pre-wrap;
+
+    color:#ddd;
+
+    line-height:1.7;
+
+}
+
+
+
+/* ===========================
+   ANIMAÇÃO
+=========================== */
+
+
+@keyframes fadeIn{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+.container,
+form,
+.card{
+
+
+    animation:fadeIn .6s ease;
+
+}
+
+
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+
+@media(max-width:768px){
+
+
+nav ul{
+
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+
+.container,
+form{
+
+
+    margin:90px 15px 30px;
+
+    padding:20px;
+
+}
+
+
+
+button{
+
+
+    width:100%;
+
+}
+
+
+
+.card{
+
+
+    padding:18px;
+
+}
+
+
+
 }
