@@ -1,38 +1,211 @@
-.App {
-  text-align: center;
+
+/* =====================================
+   CONFIGURAÇÕES GERAIS
+===================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background:
+    linear-gradient(
+      rgba(10, 10, 10, .88),
+      rgba(10, 10, 10, .94)
+    ),
+    url('../public/images/fundo.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
   color: white;
 }
 
-.App-link {
-  color: #ffffff;
+/* =====================================
+   APLICAÇÃO
+===================================== */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
 }
 
-@keyframes App-logo-spin {
+.App {
+  width: 100%;
+  min-height: 100vh;
+  color: white;
+}
+
+/* =====================================
+   TIPOGRAFIA
+===================================== */
+
+h1,
+h2,
+h3,
+h4 {
+  color: white;
+  letter-spacing: 1px;
+}
+
+p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+a {
+  color: #27ae60;
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  color: #2ecc71;
+}
+
+/* =====================================
+   IMAGENS
+===================================== */
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* =====================================
+   CONTAINERS
+===================================== */
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+/* =====================================
+   FORMULÁRIOS
+===================================== */
+
+input,
+select,
+textarea {
+  color: white;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* =====================================
+   BOTÕES GERAIS
+===================================== */
+
+button {
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+/* =====================================
+   SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #267d48;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #27ae60;
+}
+
+/* =====================================
+   SELEÇÃO DE TEXTO
+===================================== */
+
+::selection {
+  background: #27ae60;
+  color: white;
+}
+
+/* =====================================
+   ANIMAÇÕES
+===================================== */
+
+@keyframes appFadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(12px);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* =====================================
+   RESPONSIVIDADE
+===================================== */
+
+@media (max-width: 768px) {
+
+  body {
+    background-attachment: scroll;
+  }
+
+  .container {
+    padding: 20px 15px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 19px;
+  }
+
 }
