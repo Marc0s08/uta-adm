@@ -209,3 +209,124 @@ button:disabled {
   }
 
 }
+
+
+/* ========================================
+   MENU DE NAVEGAÇÃO ADMINISTRATIVO
+======================================== */
+
+.main-navigation {
+  width: 100%;
+  background: #090d0b;
+  border-bottom: 1px solid rgba(65, 255, 120, 0.2);
+  padding: 15px 25px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 100;
+}
+
+.navigation-content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.navigation-brand {
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.navigation-brand .brand-highlight {
+  color: #39e75f;
+}
+
+.navigation-brand small {
+  display: block;
+  color: #858f88;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+.navigation-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navigation-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 20px;
+  color: #c4ccc6;
+  text-decoration: none;
+  background: #151c17;
+  border: 1px solid #29372d;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.navigation-button:hover {
+  color: #39e75f;
+  background: #1b2920;
+  border-color: #39e75f;
+  transform: translateY(-2px);
+}
+
+.navigation-button.active {
+  color: #07120a;
+  background: #39e75f;
+  border-color: #39e75f;
+  box-shadow: 0 0 15px rgba(57, 231, 95, 0.2);
+}
+
+.navigation-button span {
+  font-size: 16px;
+}
+
+.app-content {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+  .main-navigation {
+    padding: 14px;
+  }
+
+  .navigation-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .navigation-brand {
+    text-align: center;
+  }
+
+  .navigation-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .navigation-button {
+    padding: 12px 8px;
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
