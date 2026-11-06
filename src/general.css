@@ -1,524 +1,556 @@
-/* ===========================
-   CONFIGURAÇÕES GERAIS
-=========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ==============================
+   CONFIGURAÇÕES GERAIS
+============================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-body{
-
-    font-family:Arial, Helvetica, sans-serif;
-
-    background:
-
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background:
     linear-gradient(
-        rgba(10,10,10,.85),
-        rgba(10,10,10,.9)
+      rgba(10, 10, 10, 0.88),
+      rgba(10, 10, 10, 0.94)
     ),
-
     url('../public/images/fundo.jpg');
 
-    background-size:cover;
-
-    background-position:center;
-
-    background-attachment:fixed;
-
-    color:white;
-
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
 }
 
+/* ==============================
+   ADMINISTRAÇÃO
+============================== */
 
-/* ===========================
-   TITULOS
-=========================== */
-
-
-h1,h2,h3{
-
-    color:white;
-
-    letter-spacing:2px;
-
+.manage-documents {
+  width: 100%;
+  max-width: 1400px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 110px 30px 50px;
+  animation: manageFadeIn 0.5s ease;
 }
 
-
-
-/* ===========================
-   NAVBAR
-=========================== */
-
-
-nav{
-
-    background:
-
-    rgba(20,20,20,.85);
-
-    backdrop-filter:blur(12px);
-
-    padding:15px;
-
-    box-shadow:
-
-    0 10px 30px rgba(0,0,0,.5);
-
-    position:fixed;
-
-    width:100%;
-
-    top:0;
-
-    z-index:1000;
-
+.manage-documents h1,
+.manage-documents h2,
+.manage-documents h3 {
+  color: #fff;
+  letter-spacing: 1px;
 }
 
-
-
-nav ul{
-
-
-    list-style:none;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:30px;
-
+.manage-subtitle {
+  display: block;
+  color: #27ae60;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
 }
 
-
-
-nav li{
-
-    margin:0;
-
+.manage-header {
+  margin-bottom: 30px;
 }
 
-
-nav a{
-
-
-    color:#ddd;
-
-    text-decoration:none;
-
-    font-weight:bold;
-
-    transition:.3s;
-
+.manage-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
-
-nav a:hover{
-
-
-    color:#27ae60;
-
+.manage-header p {
+  color: #aaa;
+  font-size: 14px;
 }
 
+/* ==============================
+   SELEÇÃO DE COLEÇÃO
+============================== */
 
+.manage-selector {
+  padding: 25px;
+  margin-bottom: 30px;
 
-
-/* ===========================
-   CONTAINERS
-=========================== */
-
-
-.container,
-form{
-
-
-    max-width:1200px;
-
-    margin:100px auto 30px;
-
-    padding:30px;
-
-
-    background:
-
-    rgba(255,255,255,.05);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.12);
-
-
-    border-radius:20px;
-
-
-    backdrop-filter:blur(12px);
-
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.5);
-
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
 }
 
-
-
-/* ===========================
-   FORMULÁRIOS
-=========================== */
-
-
-label{
-
-
-    color:#ccc;
-
-    font-weight:bold;
-
+.manage-documents label {
+  display: block;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
+.manage-documents input,
+.manage-documents select,
+.manage-documents textarea {
+  display: block;
+  width: 100%;
+  padding: 13px 15px;
+  margin-bottom: 20px;
 
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9px;
 
-input,
-select,
-textarea{
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
 
-
-    width:100%;
-
-    padding:12px;
-
-
-    margin-top:8px;
-
-    margin-bottom:15px;
-
-
-    background:
-
-    rgba(0,0,0,.5);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.15);
-
-
-    border-radius:10px;
-
-
-    color:white;
-
-
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-
-
-textarea{
-
-
-    min-height:120px;
-
-    resize:vertical;
-
+.manage-documents select {
+  cursor: pointer;
 }
 
-
-
-
-input:focus,
-select:focus,
-textarea:focus{
-
-
-    outline:none;
-
-    border-color:#27ae60;
-
+.manage-documents select option {
+  background: #202020;
+  color: white;
 }
 
-
-
-
-/* ===========================
-   CARDS
-=========================== */
-
-
-.card-container{
-
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
+.manage-documents textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
 }
 
-
-
-.card{
-
-
-    background:
-
-
-    rgba(255,255,255,.06);
-
-
-    border:
-
-
-    1px solid rgba(255,255,255,.12);
-
-
-    border-radius:18px;
-
-
-    padding:25px;
-
-
-    backdrop-filter:blur(10px);
-
-
-    transition:.3s;
-
-
+.manage-documents input:focus,
+.manage-documents select:focus,
+.manage-documents textarea:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.12);
 }
 
+/* ==============================
+   LISTA DE DOCUMENTOS
+============================== */
 
-
-.card:hover{
-
-
-    transform:translateY(-5px);
-
-
-    border-color:#27ae60;
-
-
-    box-shadow:
-
-
-    0 15px 30px rgba(0,0,0,.5);
-
-
+.manage-document-list {
+  margin-bottom: 35px;
 }
 
-
-
-
-
-/* ===========================
-   BOTÕES
-=========================== */
-
-
-button{
-
-
-    background:#27ae60;
-
-
-    color:white;
-
-
-    border:none;
-
-
-    padding:12px 25px;
-
-
-    border-radius:10px;
-
-
-    cursor:pointer;
-
-
-    font-weight:bold;
-
-
-    transition:.3s;
-
-
+.manage-section-header {
+  margin-bottom: 20px;
 }
 
-
-
-button:hover{
-
-
-    background:#1e8449;
-
-
-    transform:translateY(-3px);
-
-
+.manage-section-header h2 {
+  font-size: 21px;
+  margin-bottom: 7px;
 }
 
-
-
-.remove-field-button{
-
-
-    background:#c0392b;
-
+.manage-section-header span {
+  color: #999;
+  font-size: 13px;
 }
 
-
-.remove-field-button:hover{
-
-
-    background:#922b21;
-
+.manage-document-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
+.manage-document-card {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 
+  padding: 18px;
+  text-align: left;
 
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
 
-
-.update-button{
-
-
-    background:#2980b9;
-
+  color: white;
+  transition: 0.25s;
 }
 
-
-.update-button:hover{
-
-
-    background:#1f618d;
-
+.manage-document-card:hover {
+  background: rgba(39, 174, 96, 0.10);
+  border-color: #27ae60;
+  transform: translateY(-2px);
 }
 
-
-
-
-
-.delete-button{
-
-
-    background:#c0392b;
-
+.manage-document-card.selected {
+  background: rgba(39, 174, 96, 0.13);
+  border-color: #27ae60;
 }
 
+.manage-document-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-
-
-/* ===========================
-   CAMPOS DE TEXTO FIREBASE
-=========================== */
-
-
-.field-value{
-
-
-    white-space:pre-wrap;
-
-    color:#ddd;
-
-    line-height:1.7;
-
+  background: rgba(39, 174, 96, 0.15);
+  border-radius: 10px;
+  color: #2ecc71;
+  font-size: 23px;
 }
 
-
-
-/* ===========================
-   ANIMAÇÃO
-=========================== */
-
-
-@keyframes fadeIn{
-
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
+.manage-document-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
 }
 
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
+.manage-document-info strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
-
+.manage-document-info small {
+  color: #999;
+  font-size: 11px;
 }
 
-
-
-.container,
-form,
-.card{
-
-
-    animation:fadeIn .6s ease;
-
+.manage-document-arrow {
+  color: #27ae60;
+  font-size: 25px;
 }
 
+/* ==============================
+   EDITOR
+============================== */
 
+.manage-editor {
+  padding: 30px;
 
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
 
-/* ===========================
-   MOBILE
-=========================== */
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 
-
-@media(max-width:768px){
-
-
-nav ul{
-
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:15px;
-
+  animation: manageFadeIn 0.4s ease;
 }
 
+.manage-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 
+  padding-bottom: 25px;
+  margin-bottom: 25px;
 
-.container,
-form{
-
-
-    margin:90px 15px 30px;
-
-    padding:20px;
-
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-
-
-button{
-
-
-    width:100%;
-
+.manage-editor-header h2 {
+  font-size: 25px;
+  overflow-wrap: anywhere;
+  margin-bottom: 8px;
 }
 
-
-
-.card{
-
-
-    padding:18px;
-
+.manage-editor-header p {
+  color: #999;
+  font-size: 13px;
 }
 
+.manage-close-button {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ddd;
+  padding: 10px 18px;
+}
 
+.manage-close-button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ==============================
+   IMAGENS
+============================== */
+
+.manage-images-section {
+  margin-bottom: 30px;
+}
+
+.manage-images-section h3 {
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.manage-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 15px;
+}
+
+.manage-image-item {
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+
+.manage-image-item img {
+  display: block;
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.manage-image-item span {
+  display: block;
+  padding: 10px;
+  color: #aaa;
+  font-size: 11px;
+}
+
+/* ==============================
+   CAMPOS
+============================== */
+
+.manage-fields-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.manage-fields-header h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.manage-fields-header p {
+  color: #999;
+  font-size: 12px;
+}
+
+.manage-add-button {
+  background: #247d49;
+  white-space: nowrap;
+}
+
+.manage-add-button:hover {
+  background: #27ae60;
+}
+
+.manage-fields-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.manage-field-card {
+  padding: 22px;
+
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 13px;
+
+  transition: border 0.3s;
+}
+
+.manage-field-card:focus-within {
+  border-color: rgba(39, 174, 96, 0.6);
+}
+
+.manage-field-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.manage-field-number {
+  color: #27ae60;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.manage-remove-button {
+  background: rgba(192, 57, 43, 0.15);
+  color: #e57373;
+  border: 1px solid rgba(192, 57, 43, 0.35);
+  padding: 8px 14px;
+  font-size: 11px;
+}
+
+.manage-remove-button:hover {
+  background: #c0392b;
+  color: white;
+}
+
+/* ==============================
+   AÇÕES
+============================== */
+
+.manage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 30px;
+  padding-top: 25px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.manage-documents button {
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 9px;
+  transition: 0.25s;
+}
+
+.manage-save-button {
+  background: #27ae60;
+  color: white;
+  padding: 14px 25px;
+  flex: 1;
+}
+
+.manage-save-button:hover {
+  background: #1e8449;
+}
+
+.manage-delete-button {
+  background: #a93226;
+  color: white;
+  padding: 14px 25px;
+}
+
+.manage-delete-button:hover {
+  background: #c0392b;
+}
+
+.manage-documents button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==============================
+   MENSAGENS
+============================== */
+
+.manage-message,
+.manage-empty,
+.manage-error {
+  padding: 25px;
+  margin: 20px 0;
+
+  text-align: center;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.manage-error {
+  color: #ff7979;
+  border-color: rgba(192, 57, 43, 0.4);
+}
+
+/* ==============================
+   ANIMAÇÕES
+============================== */
+
+@keyframes manageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   RESPONSIVIDADE
+============================== */
+
+@media (max-width: 768px) {
+
+  .manage-documents {
+    padding: 95px 15px 30px;
+  }
+
+  .manage-header h1 {
+    font-size: 25px;
+  }
+
+  .manage-document-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-editor {
+    padding: 20px 15px;
+  }
+
+  .manage-editor-header {
+    align-items: flex-start;
+  }
+
+  .manage-editor-header h2 {
+    font-size: 20px;
+  }
+
+  .manage-fields-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .manage-add-button {
+    width: 100%;
+  }
+
+  .manage-actions {
+    flex-direction: column;
+  }
+
+  .manage-actions button {
+    width: 100%;
+  }
+
+  .manage-image-item img {
+    height: 100px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .manage-document-card {
+    padding: 13px;
+    gap: 10px;
+  }
+
+  .manage-field-card {
+    padding: 15px;
+  }
+
+  .manage-images-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
 }
